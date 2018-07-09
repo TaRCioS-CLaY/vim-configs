@@ -1,4 +1,5 @@
 set mouse=a
+set termguicolors
 " fix meta-keys which generate <Esc>a .. <Esc>z
 :let g:asyncrun_open = 10
 let g:user_emmet_mode='iv'
@@ -21,7 +22,7 @@ augroup enable-cr-quickfix
     autocmd!
     autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 augroup END
-nmap <F5> :%s/\s\+$/<CR>
+nmap <F5> mp:%s/\s\+$/<CR>`p
 " Mapeando para Alt+j e Alt+k moverem linhas ou bloco de código (inv)
 " nnoremap <leader>j :m .+1<CR>==
 " nnoremap <Esc>k :m .-2<CR>==
@@ -32,7 +33,7 @@ nmap <F5> :%s/\s\+$/<CR>
 noremap <F9> :AsyncRun docker-compose run --rm transformer<CR>
 nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
 nnoremap <CR> i<CR><Esc>
-nnoremap <leader>i gg=G
+nnoremap <leader>i mpgg=G`p
 nnoremap <Tab> :call QFixToggle()<CR>
 nnoremap <left> :vertical resize -5<cr>
 nnoremap <right> :vertical resize +5<cr>

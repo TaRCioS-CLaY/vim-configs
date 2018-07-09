@@ -4,3 +4,5 @@ Plug 'lumiliet/vim-twig'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mattn/emmet-vim'
+Plug 'morhetz/gruvbox'
+packadd! matchit
