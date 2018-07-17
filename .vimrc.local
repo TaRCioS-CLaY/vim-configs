@@ -72,7 +72,15 @@ nnoremap <right> :vertical resize +5<cr>
 nnoremap <up> :resize -5<cr>
 nnoremap <down> :resize +5<cr>
 
-" Função que é usada para import de arquivos
+" Ponto e vírgula no final da linha
+nmap <C-Space> mpA;<Esc>`p;
+nmap <C-@> <C-Space>
+
+" Autocomplete
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
+
+" Função que é usada para import de arquivos;
 function! IPhpInsertUse()
     call PhpInsertUse()
     call feedkeys('a',  'n')
