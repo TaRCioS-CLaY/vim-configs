@@ -29,12 +29,6 @@ function! QFixToggle()
     endif
 endfunction
 
-" Sempre que salvar um arquivo xml validar com o xsd especificado no arquivo usando SAXCount
-augroup xml-validation
-    autocmd!
-    autocmd BufWritePost *.xml :AsyncRun SAXCount -f -n -s %:p 1>/dev/null
-augroup END
-
 " Sempre que entrar na janela de quickfix retirar o mapeamento customizado do Enter
 augroup enable-cr-quickfix
     " In the quickfix window, <CR> is used to jump to the error under the cursor, so undefine the mapping there.
@@ -50,6 +44,9 @@ inoremap <Esc>J <Esc>:m .+1<CR>==gi
 inoremap <Esc>K <Esc>:m .-2<CR>==gi
 vnoremap <Esc>J :m '>+1<CR>gv=gv
 vnoremap <Esc>K :m '<-2<CR>gv=gv
+
+" Buscar o que está visualmente selecionado pressionando //
+vnoremap // y/<C-R>"<CR>
 
 " Rodar o M.D.A.
 noremap <F9> :AsyncRun docker-compose run --rm transformer<CR>
