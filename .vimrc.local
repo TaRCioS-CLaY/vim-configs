@@ -5,6 +5,12 @@
 " Suporte ao mouse
 set mouse=a
 
+" Mostrar comandos no canto inferior direito
+set showcmd
+
+" Tema do vscode
+colorscheme codedark
+
 " Ligar o menu de opções com tab
 set wildmenu
 
@@ -17,7 +23,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_winsize = 20
 
 " Melhora as cores, se tiver suporte
 if (has("termguicolors"))
@@ -41,6 +47,13 @@ let Grep_Skip_Dirs = '.git node_modules cache'
 
 " Comando do fzf
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'app/cache/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+
+"***********
+" Comandos *
+"***********
+
+" Fechar todos os outros buffers
+command! Bdall %bd|e#|bd#
 
 "***********************
 " Comandos automáticos *

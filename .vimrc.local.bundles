@@ -1,4 +1,14 @@
+" Comandos assíncronos (VIM 8+)
 Plug 'skywind3000/asyncrun.vim'
+
+" Habilita o uso do emmet (C-y ,)
 Plug 'mattn/emmet-vim'
-Plug 'morhetz/gruvbox'
+
+" Tema do vscode
+Plug 'tomasiser/vim-code-dark'
+
+" Lista de buffers no painel superior
+Plug 'ap/vim-buftabline'
+
+" Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 packadd! matchit
