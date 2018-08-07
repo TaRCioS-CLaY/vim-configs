@@ -42,7 +42,7 @@
     "boss"          : false,     // true: Tolerate assignments where comparisons would be expected
     "debug"         : false,     // true: Allow debugger statements e.g. browser breakpoints.
     "eqnull"        : false,     // true: Tolerate use of `== null`
-    "esversion"     : 5,         // {int} Specify the ECMAScript version to which the code must adhere.
+    "esversion"     : 6,         // {int} Specify the ECMAScript version to which the code must adhere.
     "moz"           : false,     // true: Allow Mozilla specific syntax (extends and overrides esnext features)
                                  // (ex: `for each`, multiple try/catch, function expression…)
     "evil"          : false,     // true: Tolerate use of `eval` and `new Function()`
@@ -66,7 +66,7 @@
 
     // Environments
     "browser"       : true,     // Web Browser (window, document, etc)
-    "browserify"    : false,    // Browserify (node.js code in the browser)
+    "browserify"    : true,    // Browserify (node.js code in the browser)
     "couch"         : false,    // CouchDB
     "devel"         : true,     // Development/debugging (alert, confirm, etc)
     "dojo"          : false,    // Dojo Toolkit
@@ -87,6 +87,8 @@
     "yui"           : false,    // Yahoo User Interface
 
     // Custom Globals
-    "globals"       : {}        // additional predefined global variables
+    "globals"       : {
+        "angular": false
+    }        // additional predefined global variables
 }
 

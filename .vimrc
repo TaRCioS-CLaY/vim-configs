@@ -14,7 +14,7 @@ if !filereadable(vimplug_exists)
   endif
   echo "Installing Vim-Plug..."
   echo ""
-  silent !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let g:not_finish_vimplug = "yes"
 
   autocmd VimEnter * PlugInstall
@@ -97,7 +97,7 @@ set shiftwidth=4
 set expandtab
 
 "" Map leader to ,
-let mapleader=','
+let mapleader="\<Space>"
 
 "" Enable hidden buffers
 set hidden

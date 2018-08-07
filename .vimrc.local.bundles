@@ -10,5 +10,20 @@ Plug 'tomasiser/vim-code-dark'
 " Lista de buffers no painel superior
 Plug 'ap/vim-buftabline'
 
+" Haiblita a busca rapida usando duas letras
+Plug 'justinmk/vim-sneak'
+
+" Analise do código em tempo real
+Plug 'w0rp/ale'
+
+" Mostra um git diff na coluna de número
+Plug 'airblade/vim-gitgutter'
+
+" Mostra linhas de indentação
+Plug 'Yggdroot/indentLine'
+
+" Simples autocomplete
+Plug 'ajh17/VimCompletesMe'
+
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 packadd! matchit
