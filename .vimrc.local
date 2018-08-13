@@ -5,6 +5,9 @@
 " Suporte ao mouse
 set mouse=a
 
+" Linha de status com mais informações
+set statusline=%#CursorColumn#%{StatuslineGit()}%#StatusLine#\ %{ChangeStatuslineColor()}%F%m%r%h%w%=%y\ (line\ %l\/%L,\ col\ %c)\ 
+
 " Mostrar comandos no canto inferior direito
 set showcmd
 
@@ -17,8 +20,27 @@ set wildmenu
 " Realçar linha e coluna onde o cursor está
 set cursorline
 
-" Linha de status com mais informações
-set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
+" De para com o modo e o sua descrição
+let g:currentmode={
+	\ 'n'  : 'Normal',
+	\ 'no' : 'N·Operator Pending',
+	\ 'v'  : 'Visual',
+	\ 'V'  : 'V·Line',
+	\ '' : 'V·Block',
+	\ 's'  : 'Select',
+	\ 'S'  : 'S·Line',
+	\ '' : 'S·Block',
+	\ 'i'  : 'Insert',
+	\ 'R'  : 'Replace',
+	\ 'Rv' : 'V·Replace',
+	\ 'c'  : 'Command',
+	\ 'cv' : 'Vim Ex',
+	\ 'ce' : 'Ex',
+	\ 'r'  : 'Prompt',
+	\ 'rm' : 'More',
+	\ 'r?' : 'Confirm',
+	\ '!'  : 'Shell',
+	\}
 
 " netrw com o estilo do nerdtree
 let g:netrw_banner = 0
@@ -95,6 +117,33 @@ function! IPhpInsertUse()
     call PhpInsertUse()
     call feedkeys('a',  'n')
 endfunction
+
+" Função para pegar a branch atual
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+" Função para retornar a branch, se for vazio retorna um espaço
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?l:branchname:''
+endfunction
+
+" Função que muda a cor da status bar dependendo do modo
+function! ChangeStatuslineColor() "{{{
+    if (mode() ==# 'v')
+        hi statusline guibg=#099942 ctermfg=6 guifg=Black ctermbg=0
+    elseif (mode() ==# 'V' && g:currentmode[mode()] ==# 'V·Line')
+        hi statusline guibg=#7c9909 ctermfg=6 guifg=Black ctermbg=0
+    elseif (mode() ==# 'i')
+        hi statusline guibg=#047199 ctermfg=6 guifg=#D4D4D4 ctermbg=0
+    elseif (mode() ==# 'R')
+        hi statusline guibg=#99091e ctermfg=6 guifg=#D4D4D4 ctermbg=0
+    else
+        hi statusline guibg=#373737 ctermfg=6 guifg=#D4D4D4 ctermbg=0
+    endif
+	return ''
+endfunction "}}}
 
 "*************
 " Mapeamento *
