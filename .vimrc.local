@@ -6,7 +6,7 @@
 set mouse=a
 
 " Linha de status com mais informações
-set statusline=%#CursorColumn#%{StatuslineGit()}%#StatusLine#\ %{ChangeStatuslineColor()}%F%m%r%h%w%=%y\ (line\ %l\/%L,\ col\ %c)\ 
+set statusline=%#CursorColumn#%{StatuslineGit()}%#StatusLine#\ %{ChangeStatuslineColor()}%f%m%r%h%w%=%y\ (line\ %l\/%L,\ col\ %c)\ 
 
 " Mostrar comandos no canto inferior direito
 set showcmd
@@ -135,6 +135,8 @@ function! ChangeStatuslineColor() "{{{
         hi statusline guibg=#099942 ctermfg=6 guifg=Black ctermbg=0
     elseif (mode() ==# 'V' && g:currentmode[mode()] ==# 'V·Line')
         hi statusline guibg=#7c9909 ctermfg=6 guifg=Black ctermbg=0
+    elseif (g:currentmode[mode()] ==# 'V·Block')
+        hi statusline guibg=#f76200 ctermfg=6 guifg=Black ctermbg=0
     elseif (mode() ==# 'i')
         hi statusline guibg=#047199 ctermfg=6 guifg=#D4D4D4 ctermbg=0
     elseif (mode() ==# 'R')
@@ -143,7 +145,7 @@ function! ChangeStatuslineColor() "{{{
         hi statusline guibg=#373737 ctermfg=6 guifg=#D4D4D4 ctermbg=0
     endif
 	return ''
-endfunction "}}}
+endfunction
 
 "*************
 " Mapeamento *
@@ -161,13 +163,13 @@ inoremap " ""<left>
 inoremap ` ``<left>
 
 " Limpar espaços em branco nos finais da linha
-nmap <F5> mp:%s/\s\+$/<CR>`p
+nnoremap <F5> mp:%s/\s\+$/<CR>`p
 
 " Buscar o que está visualmente selecionado pressionando //
 vnoremap // y/<C-R>"<CR>
 
 " Rodar o M.D.A.
-noremap <F9> :AsyncRun docker-compose run --rm transformer<CR>
+noremap <F9> :AsyncRun docker-compose run --rm php-transform<CR>
 
 " Gerar arquivo tags
 nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
