@@ -100,6 +100,11 @@ augroup enable-cr-quickfix
     autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 augroup END
 
+" Abrir todos os folding quando entrar em um arquivo
+augroup openfold
+    autocmd!
+    autocmd BufEnter,FocusGained * norm zR
+augroup END
 " Ativa o número da linha relativo apenas quando o buffer estiver em foco e no
 " normal mode
 augroup numbertoggle
@@ -130,7 +135,7 @@ endfunction
 
 " Função para pegar a branch atual
 function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 " Função para retornar a branch, se for vazio retorna um espaço
@@ -163,6 +168,10 @@ endfunction
 
 " Abrir netrw com F3
 nnoremap <F3> :Lexplore<CR>
+
+" Code folding
+set foldcolumn=4
+set foldmethod=indent
 
 " Quando abrir, também fechar
 inoremap ( ()<left>
