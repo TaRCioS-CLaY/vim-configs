@@ -22,8 +22,8 @@ Plug 'airblade/vim-gitgutter'
 " Mostra linhas de indentação
 Plug 'Yggdroot/indentLine'
 
-" Simples autocomplete
-Plug 'ajh17/VimCompletesMe'
+" Auto-fechamento de delimitadores
+Plug 'cohama/lexima.vim'
 
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 packadd! matchit

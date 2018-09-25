@@ -20,7 +20,7 @@ colorscheme codedark
 " Ligar o menu de opções com tab
 set wildmenu
 
-" Realçar linha e coluna onde o cursor está
+" Realçar linha onde o cursor está
 set cursorline
 
 " De para com o modo e o sua descrição
@@ -58,10 +58,7 @@ if (has("termguicolors"))
 endif
 
 " Validar xml com o nsjusecase.xsd
-let g:syntastic_xml_xmllint_args = "--noout --schema vendor/nasajon/mdatransformer/schemas/nsjusecase.xsd %"
 let g:ale_xml_xmllint_options = "--noout --schema vendor/nasajon/mdatransformer/schemas/nsjusecase.xsd %"
-" Número do buffer na aba
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Ao executar o AsyncRun já abrir o quickfix
 let g:asyncrun_open = 10
@@ -100,17 +97,22 @@ augroup enable-cr-quickfix
     autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 augroup END
 
-" Abrir todos os folding quando entrar em um arquivo
+" Abrir todos os foldings quando entrar em um arquivo
 augroup openfold
     autocmd!
     autocmd BufEnter,FocusGained * norm zR
 augroup END
-" Ativa o número da linha relativo apenas quando o buffer estiver em foco e no
-" normal mode
+
+" Ativa o número da linha relativo apenas quando o buffer estiver em foco e no normal mode
 augroup numbertoggle
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+augroup compilarTypeScriptAoSalvar
+    autocmd!
+    autocmd BufWritePost *.ts AsyncRun node_modules/typescript/bin/tsc
 augroup END
 "**********
 " Funções *
@@ -141,7 +143,7 @@ endfunction
 " Função para retornar a branch, se for vazio retorna um espaço
 function! StatuslineGit()
   let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?l:branchname:''
+  return strlen(l:branchname) > 0 ? l:branchname : ''
 endfunction
 
 " Função que muda a cor da status bar dependendo do modo
@@ -172,14 +174,6 @@ nnoremap <F3> :Lexplore<CR>
 " Code folding
 set foldcolumn=4
 set foldmethod=indent
-
-" Quando abrir, também fechar
-inoremap ( ()<left>
-inoremap { {}<left>
-inoremap [ []<left>
-inoremap ' ''<left>
-inoremap " ""<left>
-inoremap ` ``<left>
 
 " Limpar espaços em branco nos finais da linha
 nnoremap <F5> mp:%s/\s\+$/<CR>`p
