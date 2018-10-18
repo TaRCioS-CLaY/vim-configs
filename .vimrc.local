@@ -171,6 +171,13 @@ endfunction
 " Abrir netrw com F3
 nnoremap <F3> :Lexplore<CR>
 
+" Ir para o normal mode mais rapidamente
+:imap jk <Esc>
+:imap kj <Esc>
+
+" Salvar mais rapidamente
+:nnoremap <S-Space> :w<CR>
+
 " Code folding
 set foldcolumn=4
 set foldmethod=indent

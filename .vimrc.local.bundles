@@ -25,5 +25,8 @@ Plug 'Yggdroot/indentLine'
 " Auto-fechamento de delimitadores
 Plug 'cohama/lexima.vim'
 
+" Operação com delimitadores
+Plug 'tpope/vim-surround'
+
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 packadd! matchit
