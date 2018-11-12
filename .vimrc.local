@@ -110,10 +110,6 @@ augroup numbertoggle
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-augroup compilarTypeScriptAoSalvar
-    autocmd!
-    autocmd BufWritePost *.ts AsyncRun node_modules/typescript/bin/tsc
-augroup END
 "**********
 " Funções *
 "**********
