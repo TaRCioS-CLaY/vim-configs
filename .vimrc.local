@@ -1,6 +1,23 @@
 "*****************************
 " Configurações de variáveis *
 "*****************************
+" Configuração de leader
+let mapleader="\<Space>"
+
+" Iniciar language servers
+let g:LanguageClient_autoStart = 1
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio'],
+    \ 'php': ['~/.vim/plugged/LanguageServer-php-neovim/vendor/bin/php-language-server.php'],
+    \ }
+
+" Usar deoplete desde a inicialização
+let g:deoplete#enable_at_startup = 1
+
+" Ao abrir o tagbar atribuir o foco à ele
+let g:tagbar_autofocus = 1
 
 " Suporte ao mouse
 set mouse=a
@@ -8,7 +25,10 @@ set mouse=a
 " Mostra os números da linha de forma relativa e o número atual da linha
 set number relativenumber
 
-" Linha de status com mais informações
+" Exibir barra de status
+set laststatus=2
+
+" Barra de status com mais informações
 set statusline=%#CursorColumn#%{StatuslineGit()}%#StatusLine#\ %{ChangeStatuslineColor()}%f%m%r%h%w%=%y\ (line\ %l\/%L,\ col\ %c)\ 
 
 " Mostrar comandos no canto inferior direito
@@ -16,6 +36,10 @@ set showcmd
 
 " Tema do vscode
 colorscheme codedark
+
+" Sobrescrevendo cor do quick-scope porque ela some no tema do vscode
+highlight QuickScopePrimary guifg='#7a7608'
+highlight QuickScopeSecondary guifg='#e27bed'
 
 " Ligar o menu de opções com tab
 set wildmenu
@@ -71,6 +95,14 @@ let Grep_Skip_Dirs = '.git node_modules cache'
 
 " Comando do fzf
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'app/cache/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+
+" Se o rg está instalado usar outro comando para o FZF
+if executable('rg')
+    let ignored_files = '--glob "!.git/*" --glob "!node_modules/*" --glob "!app/cache/*" --glob "!app/logs/*" --glob "!web/uploads/*" --glob "!web/bundles/*" --glob "!tags" --glob "!web/css/*" --glob "!web/js/*"'
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore --follow '.ignored_files
+    set grepprg=rg\ --vimgrep
+    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --no-ignore --follow '.ignored_files.' --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
 
 "***********
 " Comandos *
@@ -148,7 +180,7 @@ function! ChangeStatuslineColor() "{{{
         hi statusline guibg=#099942 ctermfg=6 guifg=Black ctermbg=0
     elseif (mode() ==# 'V' && g:currentmode[mode()] ==# 'V·Line')
         hi statusline guibg=#7c9909 ctermfg=6 guifg=Black ctermbg=0
-    elseif (g:currentmode[mode()] ==# 'V·Block')
+    elseif (mode() !=# 't' && g:currentmode[mode()] ==# 'V·Block')
         hi statusline guibg=#f76200 ctermfg=6 guifg=Black ctermbg=0
     elseif (mode() ==# 'i')
         hi statusline guibg=#047199 ctermfg=6 guifg=#D4D4D4 ctermbg=0
@@ -163,20 +195,97 @@ endfunction
 "*************
 " Mapeamento *
 "*************
+" Mapeamentos do coc
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Gerencias sessões
+nnoremap <leader>so :OpenSession<Space>
+nnoremap <leader>ss :SaveSession<Space>
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+
+
+" Dividir a tela mais rapidamente
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
+
+" Toda a vez que pular para próxima palavra buscada o cursor fica no centro da tela
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Abrir netrw com F3
 nnoremap <F3> :Lexplore<CR>
 
 " Ir para o normal mode mais rapidamente
-:imap jk <Esc>
-:imap kj <Esc>
+imap jk <Esc>
+imap kj <Esc>
+
+" Selecionar todo o arquivo
+nnoremap <leader>sa ggVG
 
 " Salvar mais rapidamente
-:nnoremap <S-Space> :w<CR>
+nnoremap <leader>bs :w<CR>
+
+" Procurar nos arquivos
+nnoremap <leader>ps :Find 
+
+" Procurar arquivo na pasta atual
+nnoremap <silent> <leader>pf :FZF -m<CR>
+
+" Abrir arquivo na lista de buffers
+nnoremap <silent> <leader>bb :Buffers<CR>
+
+" Fechar buffer atual
+noremap <leader>bd :bd<CR>
+
+" Abrir/fechar tagbar
+nmap <silent> <F4> :TagbarToggle<CR>
+
+" Mover bloco de código selecionado
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Manter seleção após indentar código no modo visual
+vmap < <gv
+vmap > >gv
+
+" Mover cursor para outra janela divida
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
+" Limpar seleção da pesquisa
+nnoremap <silent> <leader><leader> :noh<cr>
+
+" Alterar de arquivo mais rapidamente
+nnoremap <silent> <leader><Tab> 
 
 " Code folding
-set foldcolumn=4
-set foldmethod=indent
+" set foldcolumn=4
+" set foldmethod=indent
+
+" Rodar script de banco
+nnoremap <F6> :w<CR>:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -f '%'<CR>
 
 " Limpar espaços em branco nos finais da linha
 nnoremap <F5> mp:%s/\s\+$/<CR>`p
@@ -188,7 +297,8 @@ vnoremap // y/<C-R>"<CR>
 noremap <F9> :AsyncRun docker-compose run --rm php-transform<CR>
 
 " Gerar arquivo tags
-nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
+" nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
+nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --exclude="\.git" --exclude="app/cache" --exclude="node_modules" --exclude="web"<CR>
 
 " Enter no modo normal funciona como no modo inserção
 nnoremap <CR> i<CR><Esc>
@@ -206,5 +316,19 @@ nnoremap <up> :resize -5<cr>
 nnoremap <down> :resize +5<cr>
 
 " Ponto e vírgula no final da linha
-nmap <C-Space> mpA;<Esc>`p;
-nmap <C-@> <C-Space>
+noremap <leader>; mpA;<Esc>`p
+
+" Vírgula no final da linha
+noremap <leader>, mpA,<Esc>`p
+
+" Abrir configurações do vim
+nnoremap <leader>ov :e ~/.vimrc<CR>
+
+" Abrir configurações pessoais do vim
+nnoremap <leader>ovl :e ~/.vimrc.local<CR>
+
+" Abrir configurações de plugins do vim
+nnoremap <leader>ovb :e ~/.vimrc.local.bundles<CR>
+
+" Atualizar configurações do nvim
+nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
