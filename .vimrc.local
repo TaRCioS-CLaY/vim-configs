@@ -245,20 +245,20 @@ imap kj <Esc>
 " Selecionar todo o arquivo
 nnoremap <leader>sa ggVG
 
-" Salvar mais rapidamente
-nnoremap <leader>bs :w<CR>
-
-" Procurar nos arquivos
-nnoremap <leader>ps :Find 
-
-" Procurar arquivo na pasta atual
-nnoremap <silent> <leader>pf :FZF -m<CR>
-
 " Abrir arquivo na lista de buffers
 nnoremap <silent> <leader>bb :Buffers<CR>
 
 " Fechar buffer atual
 noremap <leader>bd :bd<CR>
+
+" Salvar mais rapidamente
+nnoremap <leader>bs :w<CR>
+
+" Procurar arquivo na pasta atual
+nnoremap <silent> <leader>pf :FZF -m<CR>
+
+" Procurar nos arquivos
+nnoremap <leader>ps :Find 
 
 " Abrir/fechar tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
@@ -282,10 +282,6 @@ nnoremap <silent> <leader><leader> :noh<cr>
 
 " Alterar de arquivo mais rapidamente
 nnoremap <silent> <leader><Tab> 
-
-" Code folding
-" set foldcolumn=4
-" set foldmethod=indent
 
 " Rodar script de banco
 nnoremap <F6> :w<CR>:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -f '%'<CR>
