@@ -38,7 +38,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'justinmk/vim-sneak'
 
 " Analise do código em tempo real
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Mostra um git diff na coluna de número
 Plug 'airblade/vim-gitgutter'
@@ -83,3 +83,10 @@ Plug 'posva/vim-vue'
 
 " Se mover melhor com o f/t
 Plug 'unblevable/quick-scope'
+
+" Text-objects melhorados e com seek
+Plug 'wellle/targets.vim'
+
+" Explorador de arquivos
+Plug 'scrooloose/nerdtree'
+

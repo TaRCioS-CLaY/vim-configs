@@ -4,6 +4,12 @@
 " Configuração de leader
 let mapleader="\<Space>"
 
+" Configuração de local leader
+let maplocalleader="\\"
+
+" Sneak como easymotion
+let g:sneak#label = 1
+
 " Iniciar language servers
 let g:LanguageClient_autoStart = 1
 
@@ -68,13 +74,6 @@ let g:currentmode={
 	\ 'r?' : 'Confirm',
 	\ '!'  : 'Shell',
 	\}
-
-" netrw com o estilo do nerdtree
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 20
 
 " Melhora as cores, se tiver suporte
 if (has("termguicolors"))
@@ -196,9 +195,13 @@ endfunction
 " Mapeamento *
 "*************
 " Mapeamentos do coc
+" Abrir outline (ir para função/método) do coc
+nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
+" Renomear variaveis
+nmap <silent> <leader>cr <Plug>(coc-rename)
 " Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>cdp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>cdn <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -213,7 +216,7 @@ function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
@@ -232,8 +235,8 @@ noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Abrir netrw com F3
-nnoremap <F3> :Lexplore<CR>
+" Abrir NERDTree com F3
+nnoremap <F3> :NERDTreeToggle<CR>
 
 " Ir para o normal mode mais rapidamente
 imap jk <Esc>
