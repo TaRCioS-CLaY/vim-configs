@@ -90,3 +90,5 @@ Plug 'wellle/targets.vim'
 " Explorador de arquivos
 Plug 'scrooloose/nerdtree'
 
+" Warper para comandos do git
+Plug 'tpope/vim-fugitive'

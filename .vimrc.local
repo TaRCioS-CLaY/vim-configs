@@ -194,6 +194,10 @@ endfunction
 "*************
 " Mapeamento *
 "*************
+" Ir para modo normal no terminal de forma rapida
+:tnoremap jk <C-\><C-n>
+:tnoremap kj <C-\><C-n>
+
 " Mapeamentos do coc
 " Abrir outline (ir para função/método) do coc
 nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
