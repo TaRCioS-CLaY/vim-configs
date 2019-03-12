@@ -290,6 +290,9 @@ nnoremap <silent> <leader><Tab> 
 " Rodar script de banco
 nnoremap <F6> :w<CR>:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -f '%'<CR>
 
+" Rodar comando de banco
+vnoremap <F7> "sy:w<CR>:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c 's'<CR>gv
+
 " Limpar espaços em branco nos finais da linha
 nnoremap <F5> mp:%s/\s\+$/<CR>`p
 
