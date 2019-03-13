@@ -264,6 +264,9 @@ nnoremap <silent> <leader>pf :FZF -m<CR>
 " Procurar nos arquivos
 nnoremap <leader>ps :Find 
 
+" Fechar janela
+nnoremap <leader>wc :q<CR>
+
 " Abrir/fechar tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
 
@@ -291,10 +294,10 @@ nnoremap <silent> <leader><Tab> 
 nnoremap <F6> :w<CR>:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -f '%'<CR>
 
 " Rodar comando de banco
-nnoremap <F7> "sY:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c 's'<CR>
+nnoremap <F7> "sY:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c "s"<CR>
 
 " Rodar comando de banco selecionado
-vnoremap <F7> "sy:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c 's'<CR>gv
+vnoremap <F7> "sy:AsyncRun PGPASSWORD=postgres psql -U postgres -d integratto2 -h localhost -c "s"<CR>gv
 
 " Limpar espaços em branco nos finais da linha
 nnoremap <F5> mp:%s/\s\+$/<CR>`p
