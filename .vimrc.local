@@ -7,11 +7,17 @@ let mapleader="\<Space>"
 " Configuração de local leader
 let maplocalleader="\\"
 
+" Habilitar itablico do gruvbox
+let g:gruvbox_italic = 1
+
+" Gruvbox em modo dark
+set background=dark
+
 " Vimwiki fold list
-let g:vimwiki_folding = 'list'
+let g:vimwiki_folding='list'
 
 " Sneak como easymotion
-let g:sneak#label = 1
+let g:sneak#label=1
 
 " Iniciar language servers
 let g:LanguageClient_autoStart = 1
@@ -28,6 +34,30 @@ let g:deoplete#enable_at_startup = 1
 " Ao abrir o tagbar atribuir o foco à ele
 let g:tagbar_autofocus = 1
 
+" The system menu file includes a "Buffers" menu.  If you don't want this, set the 'no_buffers_menu'
+let no_buffers_menu=1
+
+" Enable hidden buffers
+set hidden
+
+" Disable the blinking cursor.
+set gcr=a:blinkon0
+set scrolloff=5
+
+" Copy/Paste/Cut from clipboard
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+
+" Ao clicar clicar com shift + botão direito do mouse, abre-se um menu
+set mousemodel=popup
+
+" Habilita cores de sintaxe
+syntax on
+
+" Show the line and column number of the cursor position
+set ruler
+
 " Suporte ao mouse
 set mouse=a
 
@@ -43,8 +73,8 @@ set statusline=%#CursorColumn#%{StatuslineGit()}%#StatusLine#\ %{ChangeStatuslin
 " Mostrar comandos no canto inferior direito
 set showcmd
 
-" Tema do vscode
-colorscheme codedark
+" Tema do gruvbox
+colorscheme gruvbox
 
 " Sobrescrevendo cor do quick-scope porque ela some no tema do vscode
 highlight QuickScopePrimary guifg='#7a7608'

@@ -31,6 +31,9 @@ Plug 'skywind3000/asyncrun.vim'
 " Habilita o uso do emmet (C-y ,)
 Plug 'mattn/emmet-vim'
 
+" Tema gruvbox
+Plug 'morhetz/gruvbox'
+
 " Tema do vscode
 Plug 'tomasiser/vim-code-dark'
 

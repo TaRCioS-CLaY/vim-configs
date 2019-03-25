@@ -22,29 +22,13 @@ endif
 
 " Required:
 call plug#begin(expand('~/.vim/plugged'))
-
-"*****************************************************************************
-"" Plug install packages
-"*****************************************************************************
-" Plug 'vim-scripts/CSApprox'
-" let g:make = 'gmake'
-" if exists('make')
-"         let g:make = 'make'
-" endif
-" Plug 'Shougo/vimproc.vim', {'do': g:make}
-
-
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
 
 " javascript
 "" Javascript Bundle
-Plug 'jelera/vim-javascript-syntax'
-
-
-" php
-
+" Plug 'jelera/vim-javascript-syntax'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -80,10 +64,6 @@ set softtabstop=0
 set shiftwidth=4
 set expandtab
 
-
-"" Enable hidden buffers
-set hidden
-
 "" Searching
 set hlsearch
 set incsearch
@@ -111,13 +91,6 @@ let g:session_command_aliases = 1
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
-syntax on
-set ruler
-set number
-
-let no_buffers_menu=1
-
-set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
 " set gfn=Monospace\ 10
@@ -135,14 +108,6 @@ endif
 if &term =~ '256color'
   set t_ut=
 endif
-
-
-"" Disable the blinking cursor.
-set gcr=a:blinkon0
-set scrolloff=5
-
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
 
 "*****************************************************************************
 "" Abbreviations
@@ -174,10 +139,10 @@ endif
 "" Autocmd Rules
 "*****************************************************************************
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
-augroup END
+" augroup vimrc-sync-fromstart
+"   autocmd!
+"   autocmd BufEnter * :syntax sync maxlines=200
+" augroup END
 
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
@@ -204,8 +169,6 @@ set autoread
 "" Mappings
 "*****************************************************************************
 
-
-
 " fzf.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
@@ -219,21 +182,10 @@ endif
 
 
 " Disable visualbell
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
-endif
-
-"" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
-
-"" Buffer nav
-" noremap <leader>q :bp<CR>
-" noremap <leader>w :bn<CR>
-
-
+" set noerrorbells visualbell t_vb=
+" if has('autocmd')
+"   autocmd GUIEnter * set visualbell t_vb=
+" endif
 
 "*****************************************************************************
 "" Custom configs
