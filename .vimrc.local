@@ -136,6 +136,9 @@ if executable('rg')
     command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --no-ignore --follow '.ignored_files.' --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
+" Pasta para snippets
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
 "***********
 " Comandos *
 "***********
@@ -383,7 +386,7 @@ nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>lo :vert botright 45split ~/vimwiki/index.wiki<CR>
 
 " Inserir data de hoje
-nnoremap <leader>ldn :r !date +\%d/\%b/\%Y\ \(\%A\)<CR>
+nnoremap <leader>ldn :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\)<CR>
 
 " Inserir data de amanhã
-nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\ \(\%A\) --date='tomorrow'<CR>
+nnoremap <leader>ldt :r !date +\%d/\%b/\%Y\(\%Y\-\%m\-\%d\)\ \(\%A\) --date='tomorrow'<CR>

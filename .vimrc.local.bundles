@@ -28,7 +28,7 @@ Plug 'tpope/vim-commentary'
 " Comandos assíncronos (VIM 8+)
 Plug 'skywind3000/asyncrun.vim'
 
-" Habilita o uso do emmet (C-y ,)
+" Habilita o uso do emmet (<C-y>,)
 Plug 'mattn/emmet-vim'
 
 " Tema gruvbox
@@ -55,20 +55,8 @@ Plug 'cohama/lexima.vim'
 " Operação com delimitadores
 Plug 'tpope/vim-surround'
 
-" Language servers para funcionalidades em várias linguagens
- " Plug 'autozimu/LanguageClient-neovim', {
- "    \ 'branch': 'next',
- "    \ 'do': 'bash install.sh',
- "    \ }
-
-" PHP language server
-" Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" endif
 
 " Habilita o uso do % em tags HTML/XML, if/else entre outros blocos
 if !has('nvim')
@@ -77,9 +65,6 @@ endif
 
 " Cursores múltiplos
 Plug 'terryma/vim-multiple-cursors'
-
-" Autocomplete para JavaaScript
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 " Syntax para arquivos vue
 Plug 'posva/vim-vue'
@@ -98,3 +83,9 @@ Plug 'tpope/vim-fugitive'
 
 " Organização
 Plug 'vimwiki/vimwiki'
+
+" Engine de snippets
+Plug 'SirVer/ultisnips'
+
+" Biblioteca de snippets
+Plug 'honza/vim-snippets'
