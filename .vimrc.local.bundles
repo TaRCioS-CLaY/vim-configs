@@ -89,3 +89,6 @@ Plug 'SirVer/ultisnips'
 
 " Biblioteca de snippets
 Plug 'honza/vim-snippets'
+
+" Editorconfig
+Plug 'editorconfig/editorconfig-vim'

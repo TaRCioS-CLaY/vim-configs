@@ -16,11 +16,14 @@ set background=dark
 " Vimwiki fold list
 let g:vimwiki_folding='list'
 
+" Desabilitar editorconfig para fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 " Sneak como easymotion
 let g:sneak#label=1
 
-" Iniciar language servers
-let g:LanguageClient_autoStart = 1
+" Desabilitar preprocessadores para deixar arquivos .vue mais rapidos
+let g:vue_disable_pre_processors=1
 
 let g:LanguageClient_serverCommands = {
     \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
@@ -149,6 +152,9 @@ command! Bdall %bd|e#|bd#
 "***********************
 " Comandos automáticos *
 "***********************
+
+" Corrigir sintaxe nos arquivos .vue
+autocmd FileType vue syntax sync fromstart
 
 " Configuração de comentário para twig
 autocmd FileType html.twig setlocal commentstring={#\ %s\ #}
