@@ -25,11 +25,25 @@ let g:sneak#label=1
 " Desabilitar preprocessadores para deixar arquivos .vue mais rapidos
 let g:vue_disable_pre_processors=1
 
-let g:LanguageClient_serverCommands = {
-    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio'],
-    \ 'php': ['~/.vim/plugged/LanguageServer-php-neovim/vendor/bin/php-language-server.php'],
-    \ }
+" Configuração do vdebug
+let g:vdebug_options = {
+\   "path_maps" : {"/var/www/html": "/home/douglasmassolari/GP"},
+\   "server" : '172.17.0.1',
+\   "port" : 9001
+\}
+
+" Vdebug mappings
+let g:vdebug_keymap = {
+\    "run" : "<Leader>dr",
+\    "run_to_cursor" : "<leader>dc",
+\    "step_over" : "<F8>",
+\    "step_into" : "<F12>",
+\    "step_out" : "<F10>",
+\    "close" : "<Leader>ds",
+\    "detach" : "<Leader>dd",
+\    "set_breakpoint" : "<Leader>db",
+\    "eval_under_cursor" : "E"
+\}
 
 " Usar deoplete desde a inicialização
 let g:deoplete#enable_at_startup = 1
@@ -45,6 +59,8 @@ set hidden
 
 " Disable the blinking cursor.
 set gcr=a:blinkon0
+
+" Número mínimo de linha que deverão ser mostradas antes e depois do cursor
 set scrolloff=5
 
 " Copy/Paste/Cut from clipboard
@@ -237,8 +253,12 @@ endfunction
 " Mapeamento *
 "*************
 " Ir para modo normal no terminal de forma rapida
-:tnoremap jk <C-\><C-n>
-:tnoremap kj <C-\><C-n>
+tnoremap jk <C-\><C-n>
+tnoremap kj <C-\><C-n>
+
+" Navegar pelo histórico de comando levando em consideração o que foi digitado
+cnoremap <C-k> <up>
+cnoremap <C-j> <down>
 
 " Mapeamentos do coc
 " Abrir outline (ir para função/método) do coc
@@ -272,6 +292,13 @@ nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
+" Git
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gl :Gpush<CR>
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gw :Gwrite<CR>
 
 " Dividir a tela mais rapidamente
 noremap <Leader>h :<C-u>split<CR>
@@ -283,6 +310,7 @@ nnoremap N Nzzzv
 
 " Abrir NERDTree com F3
 nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeFind<CR>
 
 " Ir para o normal mode mais rapidamente
 imap jk <Esc>
@@ -305,6 +333,9 @@ nnoremap <silent> <leader>pf :FZF -m<CR>
 
 " Procurar nos arquivos
 nnoremap <leader>ps :Find 
+
+" Gerar arquivo tags
+nnoremap <leader>pt :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
 
 " Fechar janela
 nnoremap <leader>wc :q<CR>
@@ -349,10 +380,6 @@ vnoremap // y/<C-R>"<CR>
 
 " Rodar o M.D.A.
 noremap <F9> :AsyncRun docker-compose run --rm php-transform<CR>
-
-" Gerar arquivo tags
-" nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
-nnoremap <F12> :AsyncRun ctags -R --fields=+laimS --exclude="\.git" --exclude="app/cache" --exclude="node_modules" --exclude="web"<CR>
 
 " Enter no modo normal funciona como no modo inserção
 nnoremap <CR> i<CR><Esc>
