@@ -54,6 +54,9 @@ let g:tagbar_autofocus = 1
 " The system menu file includes a "Buffers" menu.  If you don't want this, set the 'no_buffers_menu'
 let no_buffers_menu=1
 
+" Idioma para correção ortográfica
+set spelllang=pt
+
 " Enable hidden buffers
 set hidden
 
@@ -86,8 +89,15 @@ set number relativenumber
 " Exibir barra de status
 set laststatus=2
 
-" Barra de status com mais informações
-set statusline=%#CursorColumn#%{StatuslineGit()}%#StatusLine#\ %{ChangeStatuslineColor()}%f%m%r%h%w%=%y\ (line\ %l\/%L,\ col\ %c)\ 
+" Branch do git na statusbar
+let g:lightline = {
+            \     'active': {
+            \         'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'absolutepath', 'modified'] ]
+            \ },
+            \     'component_function': {
+            \         'gitbranch': 'fugitive#head'
+            \     }
+            \ }
 
 " Mostrar comandos no canto inferior direito
 set showcmd
@@ -104,28 +114,6 @@ set wildmenu
 
 " Realçar linha onde o cursor está
 set cursorline
-
-" De para com o modo e o sua descrição
-let g:currentmode={
-	\ 'n'  : 'Normal',
-	\ 'no' : 'N·Operator Pending',
-	\ 'v'  : 'Visual',
-	\ 'V'  : 'V·Line',
-	\ '' : 'V·Block',
-	\ 's'  : 'Select',
-	\ 'S'  : 'S·Line',
-	\ '' : 'S·Block',
-	\ 'i'  : 'Insert',
-	\ 'R'  : 'Replace',
-	\ 'Rv' : 'V·Replace',
-	\ 'c'  : 'Command',
-	\ 'cv' : 'Vim Ex',
-	\ 'ce' : 'Ex',
-	\ 'r'  : 'Prompt',
-	\ 'rm' : 'More',
-	\ 'r?' : 'Confirm',
-	\ '!'  : 'Shell',
-	\}
 
 " Melhora as cores, se tiver suporte
 if (has("termguicolors"))
@@ -225,30 +213,6 @@ function! GitBranch()
     return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
-" Função para retornar a branch, se for vazio retorna um espaço
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0 ? l:branchname : ''
-endfunction
-
-" Função que muda a cor da status bar dependendo do modo
-function! ChangeStatuslineColor() "{{{
-    if (mode() ==# 'v')
-        hi statusline guibg=#099942 ctermfg=6 guifg=Black ctermbg=0
-    elseif (mode() ==# 'V' && g:currentmode[mode()] ==# 'V·Line')
-        hi statusline guibg=#7c9909 ctermfg=6 guifg=Black ctermbg=0
-    elseif (mode() !=# 't' && g:currentmode[mode()] ==# 'V·Block')
-        hi statusline guibg=#f76200 ctermfg=6 guifg=Black ctermbg=0
-    elseif (mode() ==# 'i')
-        hi statusline guibg=#047199 ctermfg=6 guifg=#D4D4D4 ctermbg=0
-    elseif (mode() ==# 'R')
-        hi statusline guibg=#99091e ctermfg=6 guifg=#D4D4D4 ctermbg=0
-    else
-        hi statusline guibg=#373737 ctermfg=6 guifg=#D4D4D4 ctermbg=0
-    endif
-	return ''
-endfunction
-
 "*************
 " Mapeamento *
 "*************
@@ -295,7 +259,7 @@ nnoremap <leader>sc :CloseSession<CR>
 " Git
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gl :Gpush<CR>
+nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gw :Gwrite<CR>

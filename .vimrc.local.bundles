@@ -95,3 +95,12 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Debug
 Plug 'vim-vdebug/vdebug'
+
+" Executar script em tempo real
+Plug 'metakirby5/codi.vim'
+
+" LaTeX
+Plug 'lervag/vimtex'
+
+" Status bar
+Plug 'itchyny/lightline.vim'
