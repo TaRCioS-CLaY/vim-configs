@@ -104,3 +104,12 @@ Plug 'lervag/vimtex'
 
 " Status bar
 Plug 'itchyny/lightline.vim'
+
+" Elm LSP
+Plug 'elm-tooling/elm-language-server'
+
+" Outline com LSP
+Plug 'liuchengxu/vista.vim'
+
+" Guia de atalhos
+Plug 'liuchengxu/vim-which-key'
