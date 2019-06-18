@@ -198,7 +198,71 @@ let g:vista#renderer#enable_icon = 1
 let g:coc_global_extensions = ['coc-phpls', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-vimtex', 'coc-yaml']
 
 " Configuração do which-key
+call which_key#register('<Space>', "g:which_key_map")
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :WhichKey '\\'<CR>
+
+" Dicionário do which-key
+let g:which_key_map = {}
+let g:which_key_map[','] = '"," no fim da linha'
+let g:which_key_map[';'] = '";" no fim da linha'
+let g:which_key_map['<Tab>'] = 'Alterar para arquivo anterior'
+let g:which_key_map.b = {
+      \ 'name' : '+Buffer',
+      \ 'b' : 'Listar abertos',
+      \ 'd' : 'Deletar',
+      \ 's' : 'Salvar',
+      \ 'a' : 'Selecionar tudo (all)',
+      \ }
+let g:which_key_map.c = {
+      \ 'name' : '+Coc',
+      \ 'o' : 'Buscar símbolos',
+      \ 'r' : 'Renomear Variável',
+      \ 's' : 'Salvar',
+      \ }
+let g:which_key_map.d = {
+      \ 'name' : '+Debug',
+      \ 'b' : 'Adicionar breakpoint',
+      \ 'r' : 'Executar (run) o modo debug',
+      \ 's' : 'Parar (stop) o modo debug',
+      \ }
+let g:which_key_map.g = {
+      \ 'name' : '+Git',
+      \ 'b' : 'Blame',
+      \ 'c' : 'Commit',
+      \ 'l' : 'Pull',
+      \ 'p' : 'Push',
+      \ 's' : 'Status',
+      \ 'w' : 'Salvar e adicionar ao stage',
+      \ }
+let g:which_key_map.h = 'dividir-tela-horizontalmente'
+let g:which_key_map.i = 'indentar-arquivo'
+let g:which_key_map.o = {
+      \ 'name' : '+Abrir arquivos do vim',
+      \ 'v' : 'Abrir .vimrc',
+      \ 'b' : 'Abrir .vimrc.bundles',
+      \ 's' : 'Atualizar (source) configurações do vim',
+      \ }
+let g:which_key_map.p = {
+      \ 'name' : '+Projeto',
+      \ 'f' : 'Buscar (find) arquivo',
+      \ 's' : 'Procurar (search) nos arquivos',
+      \ 't' : 'Gerar arquivo de tags',
+      \ }
+let g:which_key_map.q = 'alternar-quickfix'
+let g:which_key_map.s = {
+      \ 'name' : '+Sessão',
+      \ 'c' : 'Fechar (close)',
+      \ 'd' : 'Deletar',
+      \ 'o' : 'Abrir',
+      \ 's' : 'Salvar',
+      \ }
+let g:which_key_map.u = 'importar-classe-php'
+let g:which_key_map.v = 'dividir-tela-verticalmente'
+let g:which_key_map.w = {
+      \ 'name' : '+Window/Wiki',
+      \ 'c' : 'Fechar janela',
+      \ }
 
 " Diminuir o tempo para mostrar o which-key (Default: 1000)
 set timeoutlen=500
@@ -437,7 +501,7 @@ imap jk <Esc>
 imap kj <Esc>
 
 " Selecionar todo o arquivo
-nnoremap <leader>sa ggVG
+nnoremap <leader>ba ggVG
 
 " Abrir arquivo na lista de buffers
 nnoremap <silent> <leader>bb :Buffers<CR>
@@ -526,10 +590,10 @@ noremap <leader>, mpA,<Esc>`p
 nnoremap <leader>ov :e ~/.vimrc<CR>
 
 " Abrir configurações de plugins do vim
-nnoremap <leader>ovb :e ~/.vimrc.bundles<CR>
+nnoremap <leader>ob :e ~/.vimrc.bundles<CR>
 
 " Atualizar configurações do nvim
-nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>os :source ~/.config/nvim/init.vim<CR>
 
 " Mapeamento para listas
 " Abrir lista

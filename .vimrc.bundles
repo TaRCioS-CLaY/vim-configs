@@ -16,9 +16,6 @@ endif
 " Sintasse para várias linguagens
 Plug 'sheerun/vim-polyglot'
 
-" Barra lateral com métodos e atributos da classe atual
-Plug 'majutsushi/tagbar'
-
 " Exibe espaços vazios no final da linha
 Plug 'bronson/vim-trailing-whitespace'
 
@@ -113,3 +110,6 @@ Plug 'liuchengxu/vista.vim'
 
 " Guia de atalhos
 Plug 'liuchengxu/vim-which-key'
+
+" Exibir barra de registradores
+Plug 'junegunn/vim-peekaboo'
