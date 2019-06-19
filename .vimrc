@@ -271,7 +271,7 @@ set timeoutlen=500
 set showcmd
 
 " Tema do gruvbox
-colorscheme gruvbox
+colorscheme codedark
 
 " Sobrescrevendo cor do quick-scope porque ela some no tema do vscode
 highlight QuickScopePrimary guifg='#7a7608'
@@ -285,7 +285,7 @@ set cursorline
 
 " Melhora as cores, se tiver suporte
 if (has("termguicolors"))
-    set termguicolors
+    " set termguicolors
 endif
 
 " Validar xml com o nsjusecase.xsd
@@ -325,21 +325,21 @@ command! Bdall %bd|e#|bd#
 "" Configurações visuais
 "*****************************************************************************
 
-set t_Co=256
-set guioptions=egmrti
+" set t_Co=256
+" set guioptions=egmrti
 
-let g:CSApprox_loaded = 1
-if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-else
-    if $TERM == 'xterm' && has('vim')
-        set term=xterm-256color
-    endif
-endif
+" let g:CSApprox_loaded = 1
+" if $COLORTERM == 'gnome-terminal'
+"     set term=gnome-256color
+" else
+"     if $TERM == 'xterm' && has('vim')
+"         set term=xterm-256color
+"     endif
+" endif
 
-if &term =~ '256color'
-  set t_ut=
-endif
+" if &term =~ '256color'
+"   set t_ut=
+" endif
 
 "*****************************************************************************
 "" Funções
