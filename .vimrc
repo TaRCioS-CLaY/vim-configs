@@ -59,6 +59,9 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+if has('nvim')
+    set inccommand=split
+endif
 
 " Configurações do Swap file
 set nobackup
