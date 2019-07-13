@@ -304,10 +304,17 @@ let g:user_emmet_mode='iv'
 let Grep_Skip_Dirs = '.git node_modules cache'
 
 " Comando do fzf
+
+" Ignora arquivos do GP
+" let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'app/cache/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+" Ignora arquivos do CRMWeb
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'app/cache/**' -prune -o -path 'var/cache/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 " Se o rg está instalado usar outro comando para o FZF
 if executable('rg')
+    " Ignora arquivos do GP
+    let ignored_files = '--glob "!.git/*" --glob "!node_modules/*" --glob "!app/cache/*" --glob "!app/logs/*" --glob "!web/uploads/*" --glob "!web/bundles/*" --glob "!tags" --glob "!web/css/*" --glob "!web/js/*"'
+    " Ignora arquivos do CRMWeb
     let ignored_files = '--glob "!.git/*" --glob "!node_modules/*" --glob "!var/logs/*" --glob "!var/cache/*" --glob "!app/logs/*" --glob "!web/uploads/*" --glob "!web/bundles/*" --glob "!tags" --glob "!web/css/*" --glob "!web/js/*"'
     let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore --follow '.ignored_files
     set grepprg=rg\ --vimgrep
@@ -522,6 +529,9 @@ nnoremap <silent> <leader>pf :FZF -m<CR>
 nnoremap <leader>ps :Find 
 
 " Gerar arquivo tags
+" GP
+"nnoremap <leader>pt :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="node_modules"<CR>
+" CRMWeb
 nnoremap <leader>pt :AsyncRun ctags -R --fields=+laimS --languages=php --exclude="\.git" --exclude="app/cache" --exclude="vendor" --exclude="var/cache" --exclude="node_modules"<CR>
 
 " Fechar janela
@@ -566,6 +576,9 @@ nnoremap <F5> mp:%s/\s\+$/<CR>`p
 vnoremap // y/<C-R>"<CR>
 
 " Rodar o M.D.A.
+" GP
+"noremap <F9> :AsyncRun docker-compose run --rm php-transform<CR>
+" CRMWeb
 noremap <F9> :AsyncRun docker-compose run --rm transformer<CR>
 
 " Enter no modo normal funciona como no modo inserção
