@@ -113,3 +113,12 @@ Plug 'liuchengxu/vim-which-key'
 
 " Exibir barra de registradores
 Plug 'junegunn/vim-peekaboo'
+
+" Tema simpleblack
+Plug 'lucasprag/simpleblack'
+
+" Tema Dracula
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" PATTERNS ON TEXT
+Plug 'inkarkat/vim-PatternsOnText'
